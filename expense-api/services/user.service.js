@@ -48,10 +48,8 @@ export const createUser = async (data) => {
 
 export const modificatedUser = async (userId, data) => {
   return prisma.user.update({
-    data,
-    where: {
-      id: userId,
-    },
+    where: { id: userId },
+    data: data,
   });
 };
 

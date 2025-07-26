@@ -12,42 +12,52 @@ import { ExpenseValidations } from "../common/validations/expense/expenseValidat
 // Obtener gastos
 // Se inclute obtenerlos con filtros de fecha
 export const listExpenses = handleException(async (req, res) => {
-  // Obtener el usuario activo
   const userId = parseInt(req.user.id, 10);
 
-  if (!Validations.validatedId(userId).valid) {
-    return res
-      .status(Validations.validatedId(userId).error.status)
-      .json(Validations.validatedId(userId).error.message);
+  // Validar el ID del usuario
+  const validation = Validations.validatedId(userId);
+  if (!validation.valid) {
+    return res.status(validation.error.status).json(validation.error.message);
   }
-  // Obtener el lapso de tiempo para el filtrado
-  // range -> lapso especifico
-  // start/end -> personalizado
-  const { range, start, end } = req.query;
 
+  // Obtener parámetros de consulta
+  const { range, start, end } = req.query;
   let dateFilter = {};
   const now = new Date();
 
-  // Crear el plazo de tiempo
+  // Filtrar por rangos predefinidos
   if (range === "week") {
     dateFilter.date = { gte: new Date(now.setDate(now.getDate() - 7)) };
   } else if (range === "month") {
     dateFilter.date = { gte: new Date(now.setMonth(now.getMonth() - 1)) };
   } else if (range === "3months") {
     dateFilter.date = { gte: new Date(now.setMonth(now.getMonth() - 3)) };
-  } else if (start && end) {
-    dateFilter.date = {
-      gte: new Date(start),
-      lte: new Date(end),
-    };
   }
 
-  // Obtenemos la lista de gastos
+  // Filtrar por rango personalizado
+  else if (start && end) {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    if (!isNaN(startDate) && !isNaN(endDate)) {
+      dateFilter.date = {
+        gte: startDate,
+        lte: endDate,
+      };
+    } else {
+      return res
+        .status(400)
+        .json({ error: "Invalid date format in 'start' or 'end'" });
+    }
+  }
+
+  // Obtener gastos filtrados
   try {
     const expenses = await getExpenses(userId, dateFilter);
     res.json(expenses);
   } catch (error) {
-    res.status(403).json({ error: "Error fetching expenses" });
+    console.error("Error fetching expenses:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
@@ -96,7 +106,6 @@ export const addExpense = handleException(async (req, res) => {
 
   const validBody = ExpenseValidations.checkNotEmptyExpense(
     title,
-    description,
     category,
     amount,
     date
@@ -105,7 +114,7 @@ export const addExpense = handleException(async (req, res) => {
     return res.status(validBody.error.status).json(validBody.error.message);
   }
 
-  const validTypeBody = ExpenseValidations.checkNotEmptyExpense(
+  const validTypeBody = ExpenseValidations.checkTypeOfFields(
     title,
     description,
     category,
@@ -121,7 +130,7 @@ export const addExpense = handleException(async (req, res) => {
   const newExpense = await createExpense(userId, {
     title,
     description,
-    amout: parseFloat(amount),
+    amount: parseFloat(amount),
     category,
     date,
   });
@@ -157,7 +166,7 @@ export const updateExpense = handleException(async (req, res) => {
     const upExpense = await modificatedExpense(expenseId, userId, {
       title,
       description,
-      amout: parseFloat(amount),
+      amount: parseFloat(amount),
       category,
       date,
     });

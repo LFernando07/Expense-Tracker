@@ -1,13 +1,7 @@
 export class ExpenseValidations {
   // Validar que todos los campos requeridos existan
-  static checkNotEmptyExpense = (
-    title,
-    description,
-    category,
-    amount,
-    date
-  ) => {
-    if (!title || !description || !category || !amount || !date) {
+  static checkNotEmptyExpense = (title, category, amount, date) => {
+    if (!title || !category || !amount || !date) {
       return {
         valid: false,
         error: {

@@ -24,7 +24,7 @@ export const validateUser = async (email, password) => {
 // ✅ Genera un JWT con el payload del usuario
 export const generateToken = (user) => {
   const payload = {
-    userId: user.id,
+    id: user.id,
     name: user.name,
     username: user.username,
     email: user.email,

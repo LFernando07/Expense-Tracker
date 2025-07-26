@@ -14,8 +14,14 @@ import { Validations } from "../common/common_validations.js";
 
 // Obtener un usuario
 export const getUser = handleException(async (req, res) => {
-  // Obtener el usuario
-  const userId = parseInt(req.user.id, 10);
+  // Obtener el usuario activo
+  const userId = req.user.id;
+  // Obtener el usuario mandado
+  const { id } = req.params;
+
+  if (parseInt(id, 10) !== userId) {
+    return res.status(403).json({ error: "Access denied" });
+  }
 
   if (!Validations.validatedId(userId).valid) {
     return res
@@ -109,7 +115,14 @@ export const addUser = handleException(async (req, res) => {
 // Modificar un usuario
 export const updateUser = handleException(async (req, res) => {
   // Obtenemos el usuario
-  const userId = parseInt(req.user.id, 10);
+  // Obtener el usuario activo
+  const userId = req.user.id;
+  // Obtener el usuario mandado
+  const { id } = req.params;
+
+  if (parseInt(id, 10) !== userId) {
+    return res.status(403).json({ error: "Access denied" });
+  }
 
   if (!Validations.validatedId(userId).valid) {
     return res
@@ -183,7 +196,14 @@ export const updateUser = handleException(async (req, res) => {
 // Eliminar un usuario
 export const deleteUser = handleException(async (req, res) => {
   // Obtenemos el usuario
-  const userId = parseInt(req.user.id, 10);
+  // Obtener el usuario activo
+  const userId = req.user.id;
+  // Obtener el usuario mandado
+  const { id } = req.params;
+
+  if (parseInt(id, 10) !== userId) {
+    return res.status(403).json({ error: "Access denied" });
+  }
 
   if (!Validations.validatedId(userId).valid) {
     return res

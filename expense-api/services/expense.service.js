@@ -11,7 +11,6 @@ export const getExpenses = async (userId, filter = {}) => {
       ...filter,
     },
     orderBy: {
-      userId: "desc",
       date: "desc",
     },
   });

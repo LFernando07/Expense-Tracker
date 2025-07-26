@@ -1,7 +1,7 @@
 export class Validations {
   // Validar el tipo de dato del id
   static validatedId = (id) => {
-    if (isNaN(userId)) {
+    if (isNaN(id)) {
       return {
         valid: false,
         error: {
