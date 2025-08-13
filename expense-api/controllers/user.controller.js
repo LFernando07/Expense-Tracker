@@ -117,12 +117,7 @@ export const updateUser = handleException(async (req, res) => {
   // Obtenemos el usuario
   // Obtener el usuario activo
   const userId = req.user.id;
-  // Obtener el usuario mandado
-  const { id } = req.params;
-
-  if (parseInt(id, 10) !== userId) {
-    return res.status(403).json({ error: "Access denied" });
-  }
+  console.log(userId);
 
   if (!Validations.validatedId(userId).valid) {
     return res
@@ -134,7 +129,7 @@ export const updateUser = handleException(async (req, res) => {
   const { name, username, email, password } = req.body;
 
   // Check if user exists
-  const existingUser = getUserById(userId);
+  const existingUser = await getUserById(userId);
 
   if (!existingUser) {
     return res.status(404).json({ error: "User not found" });

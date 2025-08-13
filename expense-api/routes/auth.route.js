@@ -1,5 +1,5 @@
 import express from "express";
-import authMiddleware from "../middlewares/authCors.js";
+import authMiddleware from "../middlewares/authMiddleware.js";
 import { login, logout, profile } from "../controllers/auth.controller.js";
 
 export const authRoute = () => {

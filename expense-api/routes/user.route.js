@@ -1,5 +1,4 @@
 import express from "express";
-import authMiddleware from "../middlewares/authCors.js";
 
 import {
   addUser,
@@ -7,6 +6,7 @@ import {
   updateUser,
   deleteUser,
 } from "../controllers/user.controller.js";
+import authMiddleware from "../middlewares/authMiddleware.js";
 
 export const userRoute = () => {
   // Construir el router
@@ -15,7 +15,7 @@ export const userRoute = () => {
   router.post("/", addUser);
   // Agregar middleware de autenticacion para proteger las rutas
   router.get("/:id", authMiddleware, getUser);
-  router.put("/:id", authMiddleware, updateUser);
+  router.put("/", authMiddleware, updateUser);
   router.delete("/:id", authMiddleware, deleteUser);
 
   return router;

@@ -1,0 +1,130 @@
+body {
+  all: unset;
+  background: linear-gradient(to right, #dff4ff, #86b0e5);
+  margin: 0;
+  padding: 0;
+}
+
+.registerContainer {
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 16px;
+  background: #f9fafb;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.registerContainer .header-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #2563eb;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Estilo de contenedores de inputs */
+.nameContainer,
+.usernameContainer,
+.emailContainer,
+.passwordContainer,
+.confirmPasswordContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Etiquetas */
+.nameContainer .header-text,
+.usernameContainer .header-text,
+.emailContainer .header-text,
+.passwordContainer .header-text,
+.confirmPasswordContainer .header-text {
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* Inputs */
+.nameContainer .content,
+.usernameContainer .content,
+.emailContainer .content,
+.passwordContainer .content,
+.confirmPasswordContainer .content {
+  padding: 0.7rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-size: 1rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nameContainer .content:focus,
+.usernameContainer .content:focus,
+.emailContainer .content:focus,
+.passwordContainer .content:focus,
+.confirmPasswordContainer .content:focus {
+  outline: none;
+  border-color: #22c55e; /* verde menta */
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+}
+
+/* Error */
+.registerForm .text {
+  color: #ef4444;
+  text-align: center;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Botón de envío */
+.registerForm .btn-register {
+  margin-top: 5px;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #2563eb 0%, #3996e8 100%);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.registerForm .btn-register:hover {
+  background-color: #1e293b;
+  transform: translateY(-2px);
+}
+
+.registerLink {
+  display: flex;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2563eb;
+  border-radius: 8px;
+  padding: 5px 12px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.registerLink:hover {
+  transform: scale(1.2);
+  background-color: #2563eb;
+  color: white;
+}
+
+.text-link {
+  padding: 0 5px;
+  transform: translateY(-4px);
+}
+
+.botones-register {
+  display: flex;
+  margin-bottom: 7px;
+  justify-content: space-between;
+  gap: 1rem;
+}

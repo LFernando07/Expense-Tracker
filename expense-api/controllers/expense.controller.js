@@ -68,8 +68,8 @@ export const getExpenseById = handleException(async (req, res) => {
 
   if (!Validations.validatedId(expenseId).valid) {
     return res
-      .status(Validations.validatedId(userId).error.status)
-      .json(Validations.validatedId(userId).error.message);
+      .status(Validations.validatedId(expenseId).error.status)
+      .json(Validations.validatedId(expenseId).error.message);
   }
 
   // Obtener el usuario activo
@@ -135,7 +135,7 @@ export const addExpense = handleException(async (req, res) => {
     date,
   });
 
-  res.status(201).json({ newExpense });
+  res.status(201).json(newExpense);
 });
 
 // Actualizar un gasto
@@ -145,8 +145,8 @@ export const updateExpense = handleException(async (req, res) => {
 
   if (!Validations.validatedId(expenseId).valid) {
     return res
-      .status(Validations.validatedId(userId).error.status)
-      .json(Validations.validatedId(userId).error.message);
+      .status(Validations.validatedId(expenseId).error.status)
+      .json(Validations.validatedId(expenseId).error.message);
   }
 
   // Obtener el usuario activo
@@ -171,7 +171,7 @@ export const updateExpense = handleException(async (req, res) => {
       date,
     });
 
-    res.status(200).json({ upExpense });
+    res.status(200).json(upExpense);
   } catch (error) {
     res.status(406).json({ error: "Data not content" });
   }
@@ -196,11 +196,10 @@ export const deleteExpenseById = handleException(async (req, res) => {
       .status(Validations.validatedId(userId).error.status)
       .json(Validations.validatedId(userId).error.message);
   }
-
   try {
     await deleteExpense(expenseId, userId);
 
-    res.status(204);
+    res.status(204).send();
   } catch (error) {
     res.status(406).json({ error: "Failed delete" });
   }

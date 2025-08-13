@@ -65,16 +65,19 @@ export const login = handleException(async (req, res) => {
   res.cookie("access_token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "Lax", // o 'Strict', según tus necesidades
+    sameSite: "none", // o 'Strict', según tus necesidades
     maxAge: 1000 * 60 * 60,
   });
 
   res.json({
     message: "Login successful",
     user: {
+      id: user.id,
+      name: user.name,
       username: user.username,
       email: user.email,
     },
+    token,
   });
 });
 
@@ -83,8 +86,8 @@ export const logout = handleException(async (req, res) => {
   res
     .clearCookie("access_token", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Lax",
+      secure: process.env.NODE_ENV === "production", // ❗️ Solo true en prod
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // ❗️ Correcto manejo
     })
     .json({ message: "Logout successful" });
 });

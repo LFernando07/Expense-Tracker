@@ -6,7 +6,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 //
-const JWT_SECRET = process.env.JTW_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET;
 console.log(JWT_SECRET);
 const JWT_EXPIRES_IN = "1h"; // Durabilidad de 1 hora
 

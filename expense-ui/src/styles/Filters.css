@@ -1,0 +1,27 @@
+.filters {
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.filter-option {
+  background: #2563eb;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: double;
+  border-color: royalblue;
+  cursor: pointer;
+}
+
+.filter-option:hover {
+  transform: translateY(-5px);
+}
+
+.selected {
+  border-bottom: 3px solid black;
+}

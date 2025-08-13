@@ -1,0 +1,43 @@
+.expenses-header {
+  background: linear-gradient(to top, #f8fafc 0%, #e2e8f0 100%);
+  display: flex;
+  padding: 12px 0;
+  border-radius: 10px;
+  gap: 10px;
+  justify-content: flex-start;
+  font-size: 14px;
+}
+
+.expense-count {
+  background: rgb(246, 246, 246);
+  font-weight: bold;
+  width: 380px;
+  align-content: center;
+  border-radius: 16px;
+  margin-left: 5px;
+  padding: 15px 8px;
+}
+.expense-count strong {
+  font-size: larger;
+  padding: 5px;
+  color: #2563eb;
+  border-radius: 50%;
+}
+
+.expense-records {
+  background: #2563eb;
+  color: #fff;
+  font-weight: bold;
+  align-content: center;
+  width: 400px;
+  border-radius: 16px;
+  margin-left: 5px;
+  padding: 15px 5px;
+}
+
+.expense-records strong {
+  font-size: larger;
+  padding: 5px;
+  color: #fff;
+  border-radius: 50%;
+}
