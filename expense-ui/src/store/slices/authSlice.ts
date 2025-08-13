@@ -1,11 +1,12 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { AuthState, User } from "../../types";
+import type { AuthState, InfoUser, User } from "../../types";
 import { fetchProfile, performLogout } from "../thunks/auth.thunks";
 import { createdUser, updatedUser } from "../thunks/user.thunks";
 
 const initialState: AuthState = {
   isAuth: false,
   user: null,
+  session: null,
   loading: false, // Cambié de true a false para mejor UX inicial
 };
 
@@ -14,9 +15,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     // Acción manual para login (si la necesitas)
-    login: (state, action: PayloadAction<User>) => {
+    login: (state, action: PayloadAction<InfoUser>) => {
       state.isAuth = true;
-      state.user = action.payload;
+      state.user = action.payload.user;
+      state.session = action.payload.session;
       state.loading = false;
     },
 
@@ -24,6 +26,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.isAuth = false;
       state.user = null;
+      state.session = null;
       state.loading = false;
     },
 
@@ -55,11 +58,13 @@ const authSlice = createSlice({
         state.loading = false;
         state.isAuth = true;
         state.user = action.payload.user;
+        state.session = action.payload.session;
       })
       .addCase(fetchProfile.rejected, (state) => {
         state.loading = false;
         state.isAuth = false;
         state.user = null;
+        state.session = null;
       })
 
       // Logout

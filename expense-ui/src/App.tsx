@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import { Loading } from "./components/layout/Loading.tsx";
 import { useAppDispatch } from "./hooks/store.ts";
 import { fetchProfile } from "./store/thunks/auth.thunks.ts";
+import { SessionWatcher } from "./components/session/SessionWatcher.tsx";
 
 // Importaciones dinamicas de paginas
 const LazyLoginPage = lazy(() => import("./pages/LoginPage.tsx"));
@@ -26,7 +27,10 @@ function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<Loading />}>
+        {/* Para notificacaciones */}
         <Toaster expand={true} position="top-right" richColors />
+        {/* Para expiracion de sesion */}
+        <SessionWatcher />
 
         <Routes>
           {/*Rutas no protegidas para el usuario  */}

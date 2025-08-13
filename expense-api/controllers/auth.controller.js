@@ -60,9 +60,12 @@ export const login = handleException(async (req, res) => {
   }
 
   // Generamos un toquen
-  const token = generateToken(user);
+  const { token, expiresAt, expiresIn } = generateToken(user);
+  console.log("token", token);
+  console.log("start", expiresIn);
+  console.log("end", expiresAt);
 
-  res.cookie("access_token", token, {
+  res.cookie("access_token", token, expiresAt, expiresIn, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "none", // o 'Strict', según tus necesidades
@@ -77,7 +80,11 @@ export const login = handleException(async (req, res) => {
       username: user.username,
       email: user.email,
     },
-    token,
+    session: {
+      token,
+      expiresAt, // fecha exacta de expiración
+      expiresIn, // segundos de duración
+    },
   });
 });
 
@@ -94,8 +101,14 @@ export const logout = handleException(async (req, res) => {
 
 // Obtener perfil del usuario autenticado
 export const profile = handleException(async (req, res) => {
-  const user = req.user;
+  const dataUser = req.user;
+  // Desestructuramos la informacion de profile
+  const user = Object.fromEntries(
+    Object.entries(dataUser).filter(([key]) => key !== "exp" && key !== "iat")
+  );
+  const session = req.session;
+
   if (!user) return res.status(403).json({ error: "Access not authorized" });
 
-  res.json({ user });
+  res.json({ user, session });
 });

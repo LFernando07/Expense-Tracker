@@ -47,9 +47,20 @@ export interface RegisterData extends LoginData {
   username: string;
 }
 
+export interface DataSession {
+  token: string;
+  expiresAt: number;
+  expiresIn: number;
+}
+
 export interface AuthResponse {
   user: User;
-  token: string;
+  session: DataSession;
+}
+
+export interface InfoUser {
+  user: User;
+  session: DataSession;
 }
 
 export interface RegisterResponse {
@@ -59,6 +70,7 @@ export interface RegisterResponse {
 interface AuthState {
   isAuth: boolean;
   user: User | null;
+  session: DataSession | null;
   loading: boolean;
 }
 

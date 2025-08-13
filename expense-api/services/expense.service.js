@@ -50,15 +50,15 @@ export const modificatedExpense = async (expenseId, userId, data) => {
 
 // Eliminar un gasto -> soft delete
 export const deleteExpense = async (expenseId, userId) => {
-  const existsExpense = await prisma.expense.findUnique({
-    where: {
-      id: expenseId,
-    },
-  });
+  // const existsExpense = await prisma.expense.findUnique({
+  //   where: {
+  //     id: expenseId,
+  //   },
+  // });
 
   return prisma.expense.update({
     data: {
-      isDelete: !existsExpense.isDelete,
+      isDelete: true,
     },
     where: {
       id: expenseId,

@@ -51,8 +51,7 @@ export const softDeleteExpense = createAsyncThunk(
   ) => {
     try {
       const res = await expensesAPI.delete(id);
-      console.log(res.status);
-      if (res.status == 204) return { idx: index, value: true };
+      if (res.status == 204) return { idx: index };
     } catch (error) {
       return rejectWithValue(error);
     }

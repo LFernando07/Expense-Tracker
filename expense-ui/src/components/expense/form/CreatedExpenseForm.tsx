@@ -39,11 +39,6 @@ export const CreatedExpenseForm: React.FC = () => {
     };
 
     try {
-      // console.log("expenseData", {
-      //   ...expense,
-      //   date: selectedDate?.toISOString(),
-      // });
-
       await dispatch(createExpense(expense));
 
       toast.success(`Expense: ${expense.title} creado exitosamente!`); // ✅ Toast de éxito

@@ -8,6 +8,8 @@ import { SquareMinus, SquarePen } from "lucide-react";
 import { useAppDispatch } from "../../../hooks/store";
 import { softDeleteExpense } from "../../../store/thunks/expense.thunks";
 import FormEditExpense from "../edit/FormEditExpense"; // 👈 Import del modal
+import { toast } from "sonner";
+import Swal from "sweetalert2";
 
 interface Props {
   expenses: Expense[];
@@ -87,7 +89,22 @@ export const TableExpenses: React.FC<Props> = ({ expenses }) => {
   };
 
   const handleSoftDelete = (id: ExpenseId, idx: number) => {
-    dispatch(softDeleteExpense({ id: id, index: idx }));
+    Swal.fire({
+      title: "Quieres remover este gasto?",
+      text: "No podrás recuperarla después de eliminarla.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "SI, remover!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        // Si el usuario confirma, eliminamos la nota
+        await dispatch(softDeleteExpense({ id: id, index: idx }));
+
+        toast.success("Gasto removido exitosamente");
+      }
+    });
   };
 
   return (

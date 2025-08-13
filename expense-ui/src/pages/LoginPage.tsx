@@ -46,10 +46,11 @@ const LoginPage: React.FC = () => {
 
     try {
       const res = await authAPI.login(formData);
+      console.log(res);
       // Actualizamos el estado de autenticacion
-      dispatch(login(res.user));
+      dispatch(login(res));
 
-      setCookie("access_token", res.token, {
+      setCookie("access_token", res.session.token, {
         path: "/",
         maxAge: 60 * 60,
         sameSite: "lax",

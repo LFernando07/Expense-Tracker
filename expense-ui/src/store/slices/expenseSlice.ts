@@ -72,7 +72,7 @@ const expenseSlice = createSlice({
       .addCase(softDeleteExpense.fulfilled, (state, action) => {
         state.loading = false;
         if (action.payload?.idx !== undefined)
-          state.expenses[action.payload?.idx].isDelete = action.payload.value; // Agregamos el nuevo gasto al final
+          state.expenses[action.payload?.idx].isDelete = true; // Agregamos el nuevo gasto al final
       })
       .addCase(softDeleteExpense.rejected, (state) => {
         state.loading = false;

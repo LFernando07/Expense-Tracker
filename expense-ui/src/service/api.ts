@@ -29,7 +29,7 @@ export const authAPI = {
     return await res.json();
   },
 
-  profile: async (): Promise<{ user: User }> => {
+  profile: async (): Promise<AuthResponse> => {
     const res = await fetch(`${baseURL}/auth/profile`, {
       method: "GET",
       credentials: "include",

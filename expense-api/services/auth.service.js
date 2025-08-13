@@ -30,7 +30,14 @@ export const generateToken = (user) => {
     email: user.email,
   };
 
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+
+  // Decodificar para obtener expiración
+  const decoded = jwt.decode(token);
+  const expiresAt = decoded.exp * 1000; // ms
+  const expiresIn = decoded.exp - decoded.iat; // seg
+
+  return { token, expiresAt, expiresIn };
 };
 
 // ✅ Verifica un token y devuelve el payload decodificado
