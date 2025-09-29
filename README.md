@@ -1,4 +1,4 @@
-# Gasty - Control y Manejo de Gastos Personales 💰
+# Gastly - Control y Manejo de Gastos Personales 💰
 
 Aplicación web para el **control y manejo de gastos personales**, permitiendo registrar, filtrar, visualizar y analizar tus finanzas de forma sencilla y rápida.
 
@@ -7,7 +7,7 @@ Aplicación web para el **control y manejo de gastos personales**, permitiendo r
 ## 🌐 Live Demo
 
 Explora la demostración en vivo del proyecto:
-[Gasty_App](https://expense-gasty.vercel.app/)
+[Gastly_App](https://expense-gastly.vercel.app/)
 
 ## ✍️ Características
 
@@ -40,47 +40,122 @@ Explora la demostración en vivo del proyecto:
 <details><summary><b>Estructura del proyecto</b></summary>
 
 ```bash
-Weather_Wrapper_Service/
+Expense-Tracker/
 ├── .github/
 │   └── assets/
 │       └── gasty.png
-├── backend/
-│   ├── src/
-│   │   ├── config/
-│   │   │   └── redisClient.js
-│   │   └── features/
-│   │       └── weather/
-│   │           ├── weather.cache.js
-│   │           ├── weather.controller.js
-│   │           ├── weather.route.js
-│   │           └── weather.service.js
-│   └── index.js
+├── expense-api/
+│   ├── common/
+│   │   ├── validations/
+│   │   │   ├── auth/
+│   │   │   │   └── authValidations.js
+│   │   │   ├── expense/
+│   │   │   │   └── expenseValidations.js
+│   │   │   ├── user/
+│   │   │   │   └── userValidations.js
+│   │   │   ├── common_validations.js
+│   │   │   └── handle_request.js
+│   ├── controllers/
+│   │   ├── auth.controller.js
+│   │   ├── expense.controller.js
+│   │   └── user.controller.js
+│   ├── middlewares/
+│   │   ├── authMiddleware.js
+│   │   └── corsMiddleware.js
+│   ├── prisma/
+│   │   ├── migrations/
+│   │   └── schema.prisma
+│   ├── routes/
+│   │   ├── auth.route.js
+│   │   ├── expense.route.js
+│   │   └── user.route.js
+│   ├── route/
+│   │   ├── auth.service.js
+│   │   ├── expense.service.js
+│   │   └── user.service.js
+│   │
 │   ├── .env
+│   ├── .gitignore
+│   ├── index.js
 │   ├── package-lock.json
-│   └── package.json
+│   ├── package.json
+│   ├── Procfile
+│   └── READMI.md
 ├── frontend/
 │   ├── public/
-│   │   ├── vite.svg
+│   │   └── pig.png
 │   ├── src/
 │   │   ├── assets/
-│   │   │   └── react.svg
-│   │   ├── components
-│   │   │   ├── FormWeather.tsx
-│   │   │   ├── Icons.tsx
-│   │   │   └── WeatherDash.tsx
-│   │   ├── mocks/
-│   │   │   └── Weather_Result.json
+│   │   │   ├── expense-img.png
+│   │   │   ├── expense-movil.png
+│   │   │   ├── expense.svg
+│   │   │   └── man.png
+│   │   ├── components/
+│   │   │   ├── expense/
+│   │   │   │   ├── add/
+│   │   │   │   │   └── ExpenseDrawer.tsx
+│   │   │   │   ├── charts/
+│   │   │   │   │   ├── CategoryDoughnutChart.tsx
+│   │   │   │   │   ├── ChartCards.tsx
+│   │   │   │   │   ├── ExpenseBarChart.tsx
+│   │   │   │   │   └── MetricCard.tsx
+│   │   │   │   ├── edit/
+│   │   │   │   │   └── FormEditExpense.tsx
+│   │   │   │   ├── form/
+│   │   │   │   │   ├── Calendar.tsx
+│   │   │   │   │   └── CreatedExpenseForm.tsx
+│   │   │   │   ├── table/
+│   │   │   │   │   ├── Filters.tsx
+│   │   │   │   │   ├── HeaderTable.tsx
+│   │   │   │   │   ├── ListOfExpenses.tsx
+│   │   │   │   │   ├── Search.tsx
+│   │   │   │   │   └── TableExpenses.tsx
+│   │   │   ├── layout/
+│   │   │   │   ├── Loading.tsx
+│   │   │   │   ├── NavBar.tsx
+│   │   │   │   └── SideBar.tsx
+│   │   │   ├── routes/
+│   │   │   │   └── PrivatedRoute.tsx
+│   │   │   ├── session/
+│   │   │   │   └── SessionWatcher.tsx
+│   │   ├── hooks/
+│   │   │   └── store.ts
+│   │   ├── pages/
+│   │   │   ├── DashboardPage.tsx
+│   │   │   ├── LandingPage.tsx
+│   │   │   ├── LoginPage.tsx
+│   │   │   ├── NotFoundPage.tsx
+│   │   │   ├── ProfilePage.tsx
+│   │   │   └── RegisterPage.tsx
 │   │   ├── service/
-│   │   │   └── weatherAPI.ts
+│   │   │   └── api.ts
 │   │   ├── store/
-│   │   │   ├── weather/
-│   │   │   │   ├── WeatherSlice.ts
+│   │   │   ├── slices/
+│   │   │   │   ├── authSlice.ts
+│   │   │   │   └── expenseSlice.ts
+│   │   │   ├── thunks/
+│   │   │   │   ├── auth.thunk.ts
+│   │   │   │   ├── expense.thunk.ts
+│   │   │   │   └── user.thunk.ts
 │   │   │   └── index.ts
 │   │   ├── styles
-│   │   │   ├── FormWeather.css
-│   │   │   └── WeatherDash.css
+│   │   │   ├── CreatedExpenseForm.css
+│   │   │   ├── DashBoard.css
+│   │   │   ├── Filters.css
+│   │   │   ├── FormEditExpense.css
+│   │   │   ├── HeaderTable.css
+│   │   │   ├── LandingPage.css
+│   │   │   ├── LoginPage.css
+│   │   │   ├── Navbar.css
+│   │   │   ├── NotFoundPage.module.css
+│   │   │   ├── ProfilePage.css
+│   │   │   ├── RegisterPage.css
+│   │   │   ├── Search.css
+│   │   │   ├── Sidebar.css
+│   │   │   └── TableExpense.css
 │   │   ├── App.css
 │   │   ├── App.tsx
+│   │   ├── const.ts
 │   │   ├── index.css
 │   │   ├── main.tsx
 │   │   ├── types.d.ts
@@ -91,13 +166,12 @@ Weather_Wrapper_Service/
 │   ├── index.html
 │   ├── package-lock.json
 │   ├── package.json
+│   ├── README.md
 │   ├── tsconfig.app.json
 │   ├── tsconfig.json
 │   ├── tsconfig.node.json
 │   └── vite.config.ts
-├── .gitignore
 ├── README.md
-└── package-lock.json
 ```
 
 </details>
@@ -113,7 +187,7 @@ Para poner este proyecto en funcionamiento en su entorno de desarrollo, siga est
 Note :bangbang: **Backend:** La aplicación utiliza autenticación con JWT. Por lo que se deben declarar las siguientes variables de entorno:
 `JWT_SECRET` y `SALT_ROUNDS` en el archivo `.env`.
 
-Note :bangbang: **Backend:** El sitio web utiliza Prisma ORM para el mapeo de las tablas de la base de datos. Por lo que se debe declarar una url en la variable de entorno:
+Note :bangbang: **Backend:** En la web API se usa Prisma ORM para el mapeo de las tablas de la base de datos. Por lo que se debe declarar una url en la variable de entorno:
 `DATABASE_URL` en el archivo `.env`.
 
 **Step 1:**
@@ -165,7 +239,7 @@ npm/pnpm run dev
 
 Las variables de entorno se pueden usar para la configuración. Deben configurarse antes de ejecutar la aplicación.
 
-**Expense_Tracker_App** conocido como Gasty usa [PrismaORM](https://www.prisma.io/) accede a la página oficial para poder utilizar la dependencia.
+**Expense_Tracker_App** conocido como Gastly usa [PrismaORM](https://www.prisma.io/) accede a la página oficial para poder utilizar la dependencia.
 
 Cree un archivo `.env` en el directorio raíz del proyecto (backend) y agregue las siguientes variables de entorno:
 
@@ -197,7 +271,7 @@ npm run build
 #### Backend
 
 El servicio de la Web API se encuentra hospedado en Render, link del enlace:
-— Ver [expense-tracker-api](https://weather-backend-5m1c.onrender.com/)
+— Ver [expense-tracker-api]()
 
 Para el despliegue en Render se utiliza el siguiente comando:
 
@@ -208,7 +282,7 @@ npm run build:render
 #### Frontend
 
 La App de React para consumir la API se encuentra hospedada en Vercel, link del enlace:
-— Ver [Gasty_App](https://expense-gasty.vercel.app/)
+— Ver [Gastly_App](https://expense-gastly.vercel.app/)
 
 ## 📋 Licencia
 

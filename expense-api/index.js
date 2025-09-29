@@ -1,7 +1,7 @@
 import express from "express";
 import { configDotenv } from "dotenv";
 
-import { corsMiddleware } from "./middlewares/originsCors.js";
+import { corsMiddleware } from "./middlewares/corsMiddleware.js";
 import cookieParser from "cookie-parser";
 
 import { expenseRoute } from "./routes/expense.route.js";

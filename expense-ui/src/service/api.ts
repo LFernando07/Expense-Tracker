@@ -1,5 +1,4 @@
 // src/api/api.ts
-import axios from "axios";
 import type {
   AuthResponse,
   Expense,
@@ -10,12 +9,7 @@ import type {
   User,
 } from "../types";
 
-const baseURL = "http://localhost:1234/api";
-
-const API = axios.create({
-  baseURL: "http://localhost:1234/api",
-  withCredentials: true, // <- necesario para cookies httpOnly
-});
+const baseURL = import.meta.env.VITE_API_URL || '/api'
 
 export const authAPI = {
   login: async (data: LoginData): Promise<AuthResponse> => {
@@ -64,7 +58,7 @@ export const userAPI = {
     const res = await fetch(`${baseURL}/users`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      credentials: "include", // 👈 esto es necesario para cookies
+      credentials: "include", // 
       body: JSON.stringify(data),
     });
     if (!res.ok) throw new Error("updated user failed");
@@ -108,12 +102,20 @@ export const expensesAPI = {
     const res = await fetch(`${baseURL}/expenses/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      credentials: "include", // 👈 esto es necesario para cookies
+      credentials: "include",
       body: JSON.stringify(data),
     });
     if (!res.ok) throw new Error("updated expense failed");
     return await res.json();
   },
 
-  delete: (id: ExpenseId) => API.delete(`/expenses/${id}`),
+  delete: async (id: ExpenseId): Promise<{ message: string }> => {
+    const res = await fetch(`${baseURL}/expenses/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+    if (!res.ok) throw new Error("Delete expense failed");
+    return res.json();
+  },
+
 };

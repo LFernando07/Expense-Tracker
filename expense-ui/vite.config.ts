@@ -8,4 +8,12 @@ export default defineConfig({
   optimizeDeps: {
     include: ["chart.js", "react-chartjs-2"],
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:1234",
+        changeOrigin: true
+      }
+    }
+  }
 });
