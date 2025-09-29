@@ -2,6 +2,7 @@ import cors from "cors";
 
 const ACCEPTED_ORIGINS = [
   "http://localhost:5173", // Vite
+  "http://localhost:5174", // Vite
   "http://localhost:8080", // Vue CLI
   "http://localhost:3000", // React
   "http://localhost:1234", // Personal
