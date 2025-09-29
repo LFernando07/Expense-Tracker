@@ -109,13 +109,13 @@ export const expensesAPI = {
     return await res.json();
   },
 
-  delete: async (id: ExpenseId): Promise<{ message: string }> => {
+  delete: async (id: ExpenseId) => {
     const res = await fetch(`${baseURL}/expenses/${id}`, {
       method: "DELETE",
       credentials: "include",
     });
     if (!res.ok) throw new Error("Delete expense failed");
-    return res.json();
+    return await res.json();
   },
 
 };
