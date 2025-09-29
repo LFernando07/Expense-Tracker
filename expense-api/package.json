@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "node --watch index.js"
+    "dev": "node --watch index.js",
+    "build:render": "npm install && npx prisma migrate deploy"
   },
   "keywords": [],
   "author": "",

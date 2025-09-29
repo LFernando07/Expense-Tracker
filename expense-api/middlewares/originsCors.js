@@ -1,6 +1,6 @@
 import cors from "cors";
 
-const ACCEPTED_ORIGINS = [
+const DEFAULT_LOCALHOSTS = [
   "http://localhost:5173", // Vite
   "http://localhost:5174", // Vite
   "http://localhost:8080", // Vue CLI
@@ -8,14 +8,22 @@ const ACCEPTED_ORIGINS = [
   "http://localhost:1234", // Personal
 ];
 
-export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) =>
-  cors({
+// Middleware de CORS
+export const corsMiddleware = () => {
+  // Obtenemos el origen de producción desde variable de entorno
+  const prodOrigin = process.env.CORS_ORIGIN;
+
+  // Combinamos localhost + producción si existe
+  const ACCEPTED_ORIGINS = [...DEFAULT_LOCALHOSTS];
+  if (prodOrigin) ACCEPTED_ORIGINS.push(prodOrigin);
+
+  return cors({
     origin: (origin, callback) => {
-      // Permitir peticiones sin origen (como Postman o curl)
+      // Permitir peticiones sin origen (Postman, curl)
       if (!origin) return callback(null, true);
 
       // Verificamos si el origen está permitido
-      if (acceptedOrigins.includes(origin)) {
+      if (ACCEPTED_ORIGINS.includes(origin)) {
         return callback(null, true);
       }
 
@@ -23,5 +31,6 @@ export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) =>
       return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
-    optionsSuccessStatus: 200, // Para evitar errores en navegadores antiguos
+    optionsSuccessStatus: 200, // Para navegadores antiguos
   });
+};

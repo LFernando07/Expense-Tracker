@@ -1,96 +1,216 @@
-  # Gasty - Control y Manejo de Gastos Personales 💰
+# Gasty - Control y Manejo de Gastos Personales 💰
 
 Aplicación web para el **control y manejo de gastos personales**, permitiendo registrar, filtrar, visualizar y analizar tus finanzas de forma sencilla y rápida.
 
-## Comenzando 🚀
+![demo](.github/readme_assets/gasty.png)
 
-Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.
+## 🌐 Live Demo
 
-> **💡 Nota:** Este proyecto está desarrollado con **React**, **TypeScript** y **Vite**, por lo que necesitarás Node.js instalado.
+Explora la demostración en vivo del proyecto:
+[Gasty_App](https://expense-gasty.vercel.app/)
 
-Mira **Despliegue** para conocer cómo ejecutar el proyecto en producción.
+## ✍️ Características
 
----
+- Creación de gastos
+- Formulario para editar un gasto
+- Búsqueda de gastos por titulo
+- Visualización de gastos en una tabla
+- Filtrado de gastos por activos/borrados
+- Se hace uso de un softdelete no se realizan borrados fisicos
+- Representación de gastos en graficos (barra, metricos y de pastel)
+- Interfaz responsiva y atractiva con animaciones y glassmorphism.
+- Estado global gestionado con Redux Toolkit.
+- **Backend propio** para proteger la clave de la API y servir los datos al frontend.
+- Consumo de API creada en Node - ExpressJS
+- Mapeo de una base de datos utilizando Prisma ORM
 
-### Pre-requisitos 📋
+## 👨‍💻 Tecnologías utilizadas
 
-Necesitas instalar lo siguiente antes de comenzar:
+- React JS
+- Vite
+- TypeScript
+- Redux Toolkit
+- Tailwindcss
+- Node.js + Express (Backend)
+- Prisma
+- PostgrSQL (supabase)
 
-Node.js >= 18
-npm >= 9
+[![Technologies Used](https://skillicons.dev/icons?i=ts,vite,react,redux,express,vercel,tailwind,prisma,postgres)](https://skillicons.dev)
 
-### Instalación 🔧
+<details><summary><b>Estructura del proyecto</b></summary>
 
-:bulb: **Clone:** git clone https://github.com/LFernando07/Expense-Tracker.git
+```bash
+Weather_Wrapper_Service/
+├── .github/
+│   └── assets/
+│       └── gasty.png
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   │   └── redisClient.js
+│   │   └── features/
+│   │       └── weather/
+│   │           ├── weather.cache.js
+│   │           ├── weather.controller.js
+│   │           ├── weather.route.js
+│   │           └── weather.service.js
+│   └── index.js
+│   ├── .env
+│   ├── package-lock.json
+│   └── package.json
+├── frontend/
+│   ├── public/
+│   │   ├── vite.svg
+│   ├── src/
+│   │   ├── assets/
+│   │   │   └── react.svg
+│   │   ├── components
+│   │   │   ├── FormWeather.tsx
+│   │   │   ├── Icons.tsx
+│   │   │   └── WeatherDash.tsx
+│   │   ├── mocks/
+│   │   │   └── Weather_Result.json
+│   │   ├── service/
+│   │   │   └── weatherAPI.ts
+│   │   ├── store/
+│   │   │   ├── weather/
+│   │   │   │   ├── WeatherSlice.ts
+│   │   │   └── index.ts
+│   │   ├── styles
+│   │   │   ├── FormWeather.css
+│   │   │   └── WeatherDash.css
+│   │   ├── App.css
+│   │   ├── App.tsx
+│   │   ├── index.css
+│   │   ├── main.tsx
+│   │   ├── types.d.ts
+│   │   └── vite-env.d.ts
+│   ├── .env
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── tsconfig.app.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   └── vite.config.ts
+├── .gitignore
+├── README.md
+└── package-lock.json
+```
 
-#### Backend ⌨️
+</details>
 
-[Acceder a la carpeta raiz del proyecto]
+## 🧰 Get Started
 
-1. cd Expense-Tracker
+Para poner este proyecto en funcionamiento en su entorno de desarrollo, siga estas instrucciones paso a paso.
 
-[Dirigirse al backend]
+### ⚙️ Instalación & Correrlo en Local
 
-2. cd expense-api
+**Step 0:**
 
-[Instalar dependencias]
+Note :bangbang: **Backend:** La aplicación utiliza autenticación con JWT. Por lo que se deben declarar las siguientes variables de entorno:
+`JWT_SECRET` y `SALT_ROUNDS` en el archivo `.env`.
 
-3. npm install
+Note :bangbang: **Backend:** El sitio web utiliza Prisma ORM para el mapeo de las tablas de la base de datos. Por lo que se debe declarar una url en la variable de entorno:
+`DATABASE_URL` en el archivo `.env`.
 
-[Levantar el servidor de desarrollo]
+**Step 1:**
 
-4. npm run dev
+Descargue o clone este repositorio utilizando el siguiente enlace:
 
-[Abrir en el navegador]
+```bash
+git clone https://github.com/LFernando07/Expense-Tracker.git
+```
 
-5. http://localhost:3000 (Por defecto)
+**Step 2:**
 
-#### Frontend 🖥️
+Ir al backend
+Ejecute el siguiente comando en el directorio para instalar las dependencias:
 
-[Acceder a la carpeta raiz del proyecto]
+```bash
+cd expense-api
+npm/pnpm install
+```
 
-1. cd Expense-Tracker
+**Step 3:**
+Ejecute el siguiente comando para ejecutar el servidor de desarrollo localmente:
+El backend se ejecutará normalmente en [http://localhost:3000](http://localhost:3000).
 
-[Dirigirse al frontend]
+```bash
+npm/pnpm run dev
+```
 
-2. cd expense-ui
+**Step 4:**
 
-[Instalar dependencias]
+Ir al frontend
+Ejecute el siguiente comando en el directorio para instalar las dependencias:
 
-3. npm install
+```bash
+cd expense-ui
+npm/pnpm install
+```
 
-[Levantar la aplicacion de desarrollo]
+**Step 5:**
 
-4. npm run dev
+Ejecute el siguiente comando para ejecutar el frontend en el navegador:
+El frontend se ejecutará en [http://localhost:5173](http://localhost:5173).
 
-[Abrir en el navegador]
+```bash
+npm/pnpm run dev
+```
 
-5. http://localhost:5173 (Por defecto)
+## 🔒 Environment Variables
 
-#### Ejecutando las pruebas ⚙️
+Las variables de entorno se pueden usar para la configuración. Deben configurarse antes de ejecutar la aplicación.
 
-Actualmente no hay pruebas automatizadas implementadas.
-:bulb: **Vitest:** npm install vitest --save-dev // npm run test
+**Expense_Tracker_App** conocido como Gasty usa [PrismaORM](https://www.prisma.io/) accede a la página oficial para poder utilizar la dependencia.
 
-#### Despliegue 📦
+Cree un archivo `.env` en el directorio raíz del proyecto (backend) y agregue las siguientes variables de entorno:
 
-:bulb: **Construcción:** npm run build
+```env
+DATABASE_URL=<DATABASE_URL>
+```
 
-#### Construido con 🛠️
+Ademas de que la aplicación utiliza en la API JSONWEBTOKEN para la autenticación se debe instalar la dependencia **npm/pnpm i jsonwebtoken**
+y agegar en `.env` las siguientes variables de enterno:
 
-- React - Librería de interfaz de usuario
-- TypeScript - Tipado estático
-- Vite - Herramienta de construcción y desarrollo rápido
-- TailwindCSS - Framework CSS
-- react-day-picker - Selector de fechas
-- Node Js with ExpressJS
-- Prisma ORM
-- PostgreSQL
+```env
+JWT_SECRET = <VALOR_JWT_SECRET>
+SALT_ROUNDS=<VALOR_NUMERICO>
 
-#### Autores ✒️
+```
 
-Luis Fernando - Desarrollador principal - LFernando07
+## 🚀 Despliegue
 
-#### Licencia 📄
+### Despliegue en producción (manual)
 
-Este proyecto está bajo la licencia MIT - mira el archivo LICENSE para más detalles.
+Puede crear una compilación de producción optimizada con el siguiente comando:
+
+```bash
+npm run build
+```
+
+### Despliegue Separado De Backend — Frontend
+
+#### Backend
+
+El servicio de la Web API se encuentra hospedado en Render, link del enlace:
+— Ver [expense-tracker-api](https://weather-backend-5m1c.onrender.com/)
+
+Para el despliegue en Render se utiliza el siguiente comando:
+
+```bash
+npm run build:render
+```
+
+#### Frontend
+
+La App de React para consumir la API se encuentra hospedada en Vercel, link del enlace:
+— Ver [Gasty_App](https://expense-gasty.vercel.app/)
+
+## 📋 Licencia
+
+**Gasty_App** es software de código abierto
+— Ver [licensed as MIT](https://opensource.org/license/mit/) y es de uso gratuito
