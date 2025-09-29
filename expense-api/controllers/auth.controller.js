@@ -61,9 +61,6 @@ export const login = handleException(async (req, res) => {
 
   // Generamos un toquen
   const { token, expiresAt, expiresIn } = generateToken(user);
-  console.log("token", token);
-  console.log("start", expiresIn);
-  console.log("end", expiresAt);
 
   res.cookie("access_token", token, expiresAt, expiresIn, {
     httpOnly: true,

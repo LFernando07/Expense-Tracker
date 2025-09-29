@@ -115,6 +115,11 @@ export const expensesAPI = {
       credentials: "include",
     });
     if (!res.ok) throw new Error("Delete expense failed");
+    console.log(res.status)
+    if (res.status === 204) {
+      return { status: 204 }; // 👈 nada de res.json()
+    }
+
     return await res.json();
   },
 

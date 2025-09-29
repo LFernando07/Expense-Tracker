@@ -45,13 +45,10 @@ export const updateExpense = createAsyncThunk(
 
 export const softDeleteExpense = createAsyncThunk(
   "expense/removeExpense",
-  async (
-    { id, index }: { id: ExpenseId; index: number },
-    { rejectWithValue }
-  ) => {
+  async ({ id }: { id: ExpenseId }, { rejectWithValue }) => {
     try {
       const res = await expensesAPI.delete(id);
-      if (res.status == 204) return { idx: index };
+      if (res.status === 204) return { id }; // devolvemos id
     } catch (error) {
       return rejectWithValue(error);
     }

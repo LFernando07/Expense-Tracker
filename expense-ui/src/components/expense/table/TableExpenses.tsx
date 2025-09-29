@@ -16,6 +16,7 @@ interface Props {
 }
 
 export const TableExpenses: React.FC<Props> = ({ expenses }) => {
+
   // Obtención de dispatch
   const dispatch = useAppDispatch();
 
@@ -88,7 +89,7 @@ export const TableExpenses: React.FC<Props> = ({ expenses }) => {
     setSelectedExpense(null);
   };
 
-  const handleSoftDelete = (id: ExpenseId, idx: number) => {
+  const handleSoftDelete = async (id: ExpenseId) => {
     Swal.fire({
       title: "Quieres remover este gasto?",
       text: "No podrás recuperarla después de eliminarla.",
@@ -99,8 +100,7 @@ export const TableExpenses: React.FC<Props> = ({ expenses }) => {
       confirmButtonText: "SI, remover!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        // Si el usuario confirma, eliminamos la nota
-        await dispatch(softDeleteExpense({ id: id, index: idx }));
+        await dispatch(softDeleteExpense({ id }));
 
         toast.success("Gasto removido exitosamente");
       }
@@ -131,8 +131,8 @@ export const TableExpenses: React.FC<Props> = ({ expenses }) => {
         </thead>
         <tbody>
           {filteredTitleExpenses.length > 0 ? (
-            filteredTitleExpenses.map((expense: Expense, idx) => (
-              <tr key={`${expense.id}-${expense.id}`}>
+            filteredTitleExpenses.map((expense: Expense) => (
+              <tr key={`${expense.id}`}>
                 <td>{expense.title}</td>
                 <td>{expense.description || "—"}</td>
                 <td>${expense.amount.toFixed(2)}</td>
@@ -148,9 +148,8 @@ export const TableExpenses: React.FC<Props> = ({ expenses }) => {
                 </td>
                 <td>
                   <span
-                    className={`badge ${
-                      expense.isDelete ? "delete" : "active"
-                    }`}
+                    className={`badge ${expense.isDelete ? "delete" : "active"
+                      }`}
                   >
                     {expense.isDelete ? "Delete" : "Active"}
                   </span>
@@ -174,7 +173,7 @@ export const TableExpenses: React.FC<Props> = ({ expenses }) => {
                     </button>
                     <button
                       style={{ color: "red", cursor: "pointer" }}
-                      onClick={() => handleSoftDelete(expense.id, idx)}
+                      onClick={() => handleSoftDelete(expense.id)}
                       title="Eliminar gasto"
                     >
                       <SquareMinus />
