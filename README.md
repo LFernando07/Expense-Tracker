@@ -4,11 +4,6 @@ Aplicación web para el **control y manejo de gastos personales**, permitiendo r
 
 ![demo](.github/readme_assets/gasty.png)
 
-## 🌐 Live Demo
-
-Explora la demostración en vivo del proyecto:
-[Gastly_App](https://expense-gastly.vercel.app/)
-
 ## ✍️ Características
 
 - Creación de gastos
@@ -255,34 +250,6 @@ JWT_SECRET = <VALOR_JWT_SECRET>
 SALT_ROUNDS=<VALOR_NUMERICO>
 
 ```
-
-## 🚀 Despliegue
-
-### Despliegue en producción (manual)
-
-Puede crear una compilación de producción optimizada con el siguiente comando:
-
-```bash
-npm run build
-```
-
-### Despliegue Separado De Backend — Frontend
-
-#### Backend
-
-El servicio de la Web API se encuentra hospedado en Render, link del enlace:
-— Ver [expense-tracker-api]()
-
-Para el despliegue en Render se utiliza el siguiente comando:
-
-```bash
-npm run build:render
-```
-
-#### Frontend
-
-La App de React para consumir la API se encuentra hospedada en Vercel, link del enlace:
-— Ver [Gastly_App](https://expense-gastly.vercel.app/)
 
 ## 📋 Licencia
 
